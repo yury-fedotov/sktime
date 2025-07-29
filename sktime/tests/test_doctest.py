@@ -66,19 +66,19 @@ def _all_functions_cached(module_name, only_changed_modules=False):
 
     # Walk through the package's modules
     package_path = package.__path__[0]
-    for _, mod_name, _ in pkgutil.walk_packages(
+    for _, modname, _ in pkgutil.walk_packages(
         path=[package_path], prefix=package.__name__ + "."
     ):
         # Skip modules starting with 'all' or 'test'
-        if mod_name.split(".")[-1].startswith(EXCLUDE_MODULES_STARTING_WITH):
+        if modname.split(".")[-1].startswith(EXCLUDE_MODULES_STARTING_WITH):
             continue
 
         # Skip modules that have not changed
-        if only_changed_modules and not run_test_module_changed(mod_name):
+        if only_changed_modules and not run_test_module_changed(modname):
             continue
 
         # Import the module
-        module = importlib.import_module(mod_name)
+        module = importlib.import_module(modname)
 
         # Get all functions from the module
         for name, obj in inspect.getmembers(module, inspect.isfunction):
