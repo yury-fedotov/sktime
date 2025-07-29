@@ -6,7 +6,6 @@ __pycache__/
 # C extensions
 *.so
 *.c
-this-should-not-be-ignored
 
 # Distribution / packaging
 .Python
